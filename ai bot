@@ -1,0 +1,27 @@
+import openai
+
+# Add your API key here
+openai.api_key = "YOUR_API_KEY"
+
+def chat_with_ai(prompt):
+    response = openai.ChatCompletion.create(
+        model="gpt-4o-mini",
+        messages=[
+            {"role": "system", "content": "You are a helpful AI assistant."},
+            {"role": "user", "content": prompt}
+        ]
+    )
+    
+    return response['choices'][0]['message']['content']
+
+# Chat loop
+print("AI Bot is running (type 'exit' to stop)\n")
+
+while True:
+    user_input = input("You: ")
+    
+    if user_input.lower() == "exit":
+        break
+    
+    reply = chat_with_ai(user_input)
+    print("Bot:", reply)
